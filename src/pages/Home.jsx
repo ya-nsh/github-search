@@ -1,9 +1,10 @@
 import React from 'react';
+import UserResults from '../components/users/UserResults';
 
 export default function Home() {
   return (
-    <div>
-      <h1>Welcome</h1>
-    </div>
+    <>
+      <UserResults />
+    </>
   );
 }
