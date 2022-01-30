@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 export default function UserItem({ user }) {
   return (
-    <div className="card shadow-xl compact side">
+    <div className="card card-bordered shadow-xl compact side">
       <div className="flex-row items-center space-x-4 card-body">
         <div>
           <div className="avatar">

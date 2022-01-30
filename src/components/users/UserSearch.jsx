@@ -22,14 +22,14 @@ export default function UserSearch() {
 
   // grid grid-cols-1 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 mb-8 gap-8
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center mb-14">
       <div className="flex-grow-0 flex-shrink-0 basis-3/5">
         <form onSubmit={handleSubmit}>
           <div className="form-control">
             <div className="relative">
               <input
                 className="w-full pr-40 bg-gray-200 input input-lg text-black border-2 border-gray-200 focus:border-gray-800 focus:outline-none focus:bg-white focus:placeholder-gray-600"
-                placeholder="Search"
+                placeholder="Search a user"
                 value={text}
                 onChange={handleChange}
               />
