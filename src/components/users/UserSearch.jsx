@@ -1,8 +1,10 @@
 import React, { useState, useContext } from 'react';
 import GithubContext from '../../context/github/GithubContext';
+import AlertContext from '../../context/alert/AlertContext';
 
 export default function UserSearch() {
   const { users, searchUsers, clearUsers } = useContext(GithubContext);
+  const { setAlert } = useContext(AlertContext);
   const [text, setText] = useState('');
 
   const handleChange = e => {
@@ -12,7 +14,7 @@ export default function UserSearch() {
   const handleSubmit = e => {
     e.preventDefault();
     if (text === '') {
-      alert('Please enter a username');
+      setAlert('Please enter a username', 'error');
     } else {
       // search users
       searchUsers(text);
@@ -20,7 +22,6 @@ export default function UserSearch() {
     }
   };
 
-  // grid grid-cols-1 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 mb-8 gap-8
   return (
     <div className="flex justify-center mb-14">
       <div className="flex-grow-0 flex-shrink-0 basis-3/5">
