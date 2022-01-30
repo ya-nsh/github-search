@@ -33,9 +33,33 @@ export const GithubProvider = ({ children }) => {
 
     dispatch({ type: 'GET_USERS', payload: data }); // payload is the data that we want to pass to the reducer
   };
+
+  const searchUsers = async text => {
+    setLoading();
+    const params = new URLSearchParams({
+      q: text
+    });
+
+    const res = await fetch(`${GITHUB_URL}/search/users?${params}`, {
+      headers: {
+        Authorization: `token ${GITHUB_TOKEN}`
+      }
+    });
+
+    const { items } = await res.json();
+    dispatch({ type: 'GET_USERS', payload: items });
+  };
+
+  const clearUsers = () => dispatch({ type: 'CLEAR_USERS' });
+
   return (
     <GithubContext.Provider
-      value={{ users: state.users, loading: state.loading, fetchUsers }}
+      value={{
+        users: state.users,
+        loading: state.loading,
+        searchUsers,
+        clearUsers
+      }}
     >
       {children}
     </GithubContext.Provider>

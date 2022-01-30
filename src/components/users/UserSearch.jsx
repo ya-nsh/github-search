@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import GithubContext from '../../context/github/GithubContext';
 
 export default function UserSearch() {
-  const { users } = useContext(GithubContext);
+  const { users, searchUsers, clearUsers } = useContext(GithubContext);
   const [text, setText] = useState('');
 
   const handleChange = e => {
@@ -15,7 +15,7 @@ export default function UserSearch() {
       alert('Please enter a username');
     } else {
       // search users
-
+      searchUsers(text);
       setText('');
     }
   };
@@ -45,7 +45,9 @@ export default function UserSearch() {
       </div>
       {users.length > 0 && (
         <div>
-          <button className="btn btn-ghost btn-lg">Clear</button>
+          <button className="btn btn-ghost btn-lg" onClick={clearUsers}>
+            Clear
+          </button>
         </div>
       )}
     </div>
