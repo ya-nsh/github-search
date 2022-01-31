@@ -9,7 +9,8 @@ This project was made in React.
 ## Screenshots
 
 ![App Screenshot](https://i.imgur.com/Etj4f9T.png)
-![App Screenshot2](https://i.imgur.com/m7VSDsS.png)
+![App Screenshot2](https://i.imgur.com/J6zQu7G.png)
+![App Screenshot3](https://i.imgur.com/m7VSDsS.png)
 
 ## Deployment
 
