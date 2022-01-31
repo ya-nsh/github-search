@@ -4,6 +4,8 @@ Search for users and their repositories on GitHub.
 
 This project was made in React.
 
+[Live Demo](https://github-search-ruby.vercel.app/)
+
 ## Screenshots
 
 ![App Screenshot](https://i.imgur.com/Etj4f9T.png)
