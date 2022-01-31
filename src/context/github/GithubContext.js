@@ -2,16 +2,15 @@ import { createContext, useReducer } from 'react';
 import githubReducer from './GithubReducer';
 
 const GithubContext = createContext();
+const axios = require('axios');
 
 const GITHUB_URL = process.env.REACT_APP_GITHUB_URL;
 const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
 
 export const GithubProvider = ({ children }) => {
-  // const [users, setUsers] = useState([]);
-  // const [loading, setLoading] = useState(true);
-
   const initialState = {
     users: [],
+    user: {},
     loading: false
   };
   const [state, dispatch] = useReducer(githubReducer, initialState);
@@ -50,14 +49,59 @@ export const GithubProvider = ({ children }) => {
     dispatch({ type: 'GET_USERS', payload: items });
   };
 
+  // const getSingleUser = async login => {
+  //   setLoading();
+
+  //   const res = await fetch(`${GITHUB_URL}/users/${login}`, {
+  //     headers: {
+  //       Authorization: `token ${GITHUB_TOKEN}`
+  //     }
+  //   });
+
+  //   if (res.status === 404) {
+  //     window.location = '/notfound';
+  //   } else {
+  //     const { data } = await res.json();
+  //     console.log('data');
+  //     console.log(data);
+  //     dispatch({ type: 'GET_USER', payload: data });
+  //   }
+  // };
+
+  async function getSingleUser(login) {
+    setLoading();
+
+    try {
+      const response = await axios.get(`${GITHUB_URL}/users/${login}`, {
+        headers: {
+          Authorization: `token ${GITHUB_TOKEN}`
+        }
+      });
+      if (response.status === 404) {
+        window.location = '/notfound';
+      } else {
+        // const { data } = await response.json();
+        console.log(response);
+        console.log('data');
+        console.log(response.data);
+
+        dispatch({ type: 'GET_USER', payload: response.data });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const clearUsers = () => dispatch({ type: 'CLEAR_USERS' });
 
   return (
     <GithubContext.Provider
       value={{
         users: state.users,
+        user: state.user,
         loading: state.loading,
         searchUsers,
+        getSingleUser,
         clearUsers
       }}
     >
